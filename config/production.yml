@@ -1,0 +1,47 @@
+name: lila-tictactoe
+
+logger:
+  level: INFO
+  stdout: true
+  format: json
+
+console:
+  port: 7351
+  username: "admin"
+  password: ""  # Set via NAKAMA_CONSOLE_PASSWORD env var
+  signing_key: ""  # Set via NAKAMA_CONSOLE_SIGNING_KEY env var
+
+session:
+  token_expiry_sec: 604800
+  refresh_token_expiry_sec: 1209600
+  # Set encryption keys via env vars:
+  # NAKAMA_SESSION_ENCRYPTION_KEY
+  # NAKAMA_SESSION_REFRESH_ENCRYPTION_KEY
+
+# Database connection - set via NAKAMA_DATABASE_ADDRESS env var
+# Format: "username:password@host:port/database?sslmode=require"
+database:
+  address: []
+
+runtime:
+  js_entrypoint: "index.js"
+
+matchmaker:
+  max_tickets: 10
+  interval_sec: 3
+  max_intervals: 60
+
+leaderboard:
+  blacklist_rank_cache:
+  callback_queue_size: 100
+  callback_queue_workers: 8
+
+socket:
+  max_message_size_bytes: 4096
+  max_request_size_bytes: 131072
+  read_buffer_size_bytes: 4096
+  write_buffer_size_bytes: 4096
+  read_timeout_ms: 10000
+  write_timeout_ms: 10000
+  ping_period_ms: 15000
+  pong_wait_ms: 25000

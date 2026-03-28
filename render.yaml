@@ -1,0 +1,33 @@
+# Render.com Blueprint for LILA Tic-Tac-Toe Backend
+# Deploy: Connect your GitHub repo and select this render.yaml
+
+databases:
+  - name: lila-postgres
+    plan: free
+    databaseName: nakama
+    user: nakama
+
+services:
+  - type: web
+    name: lila-nakama
+    plan: free
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    healthCheckPath: /healthcheck
+    envVars:
+      # Database connection (auto-populated from database)
+      - key: NAKAMA_DATABASE_ADDRESS
+        fromDatabase:
+          name: lila-postgres
+          property: connectionString
+      # Console settings
+      - key: NAKAMA_CONSOLE_PASSWORD
+        generateValue: true
+      - key: NAKAMA_CONSOLE_SIGNING_KEY
+        generateValue: true
+      # Session encryption keys
+      - key: NAKAMA_SESSION_ENCRYPTION_KEY
+        generateValue: true
+      - key: NAKAMA_SESSION_REFRESH_ENCRYPTION_KEY
+        generateValue: true
