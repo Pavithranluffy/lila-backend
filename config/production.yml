@@ -8,8 +8,7 @@ logger:
 console:
   port: 7351
   username: "admin"
-  password: ""  # Set via NAKAMA_CONSOLE_PASSWORD env var
-  signing_key: ""  # Set via NAKAMA_CONSOLE_SIGNING_KEY env var
+  # password and signing_key are set via NAKAMA_CONSOLE_PASSWORD and NAKAMA_CONSOLE_SIGNING_KEY env vars
 
 session:
   token_expiry_sec: 604800
