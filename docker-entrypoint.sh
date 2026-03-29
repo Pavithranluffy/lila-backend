@@ -1,7 +1,11 @@
 #!/bin/sh
 set -e
 
-# Build the Nakama startup command with env var overrides
+echo "Running database migrations..."
+/nakama/nakama migrate up \
+  --database.address "$NAKAMA_DATABASE_ADDRESS"
+
+echo "Starting Nakama server..."
 exec /nakama/nakama \
   --config /nakama/data/production.yml \
   --database.address "$NAKAMA_DATABASE_ADDRESS" \
