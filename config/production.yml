@@ -17,12 +17,10 @@ session:
   # NAKAMA_SESSION_ENCRYPTION_KEY
   # NAKAMA_SESSION_REFRESH_ENCRYPTION_KEY
 
-# Database connection - set via NAKAMA_DATABASE_ADDRESS env var
-# Format: "username:password@host:port/database?sslmode=require"
-database:
-  address: []
+# Database connection is set via NAKAMA_DATABASE_ADDRESS env var on Render
 
 runtime:
+  path: "/nakama/data/modules"
   js_entrypoint: "index.js"
 
 matchmaker:
