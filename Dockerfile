@@ -7,6 +7,10 @@ COPY build/index.js /nakama/data/modules/
 COPY config/local.yml /nakama/data/local.yml
 COPY config/production.yml /nakama/data/production.yml
 
+# Copy and make executable the entrypoint script
+COPY docker-entrypoint.sh /nakama/docker-entrypoint.sh
+RUN chmod +x /nakama/docker-entrypoint.sh
+
 # Expose Nakama ports
 # 7350 = HTTP API (main port for Render)
 # 7349 = gRPC
@@ -17,6 +21,5 @@ EXPOSE 7349 7350 7351
 HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
   CMD curl -f http://localhost:7350/healthcheck || exit 1
 
-# Set entry point
-ENTRYPOINT ["/nakama/nakama"]
-CMD ["--config", "/nakama/data/production.yml"]
+# Use entrypoint script to pass env vars as CLI flags to Nakama
+ENTRYPOINT ["/nakama/docker-entrypoint.sh"]
